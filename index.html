@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suhaas Reddy — Career Timeline</title>
+  <meta name="description" content="A timeline of Suhaas Reddy's work: AI SRE at Datadog, Capital One, computational photography at Google Research, hyperscale logs pipelines at Google, and Carnegie Mellon.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow mono">Software Engineer</p>
+      <h1>Suhaas Reddy</h1>
+      <p class="lede">
+        From computational photography in the Google Pixel camera to petabyte-scale data
+        pipelines to AI agents that investigate production incidents. This is the longer
+        story behind my resume, newest first.
+      </p>
+      <nav class="jump" aria-label="Jump to a period">
+        <a href="#datadog"><span class="mono">2025</span> Datadog</a>
+        <a href="#capital-one"><span class="mono">2024</span> Capital One</a>
+        <a href="#google-research"><span class="mono">2021</span> Google Research</a>
+        <a href="#google-infra"><span class="mono">2017</span> Google Product Infra</a>
+        <a href="#cmu"><span class="mono">2013</span> Carnegie Mellon</a>
+      </nav>
+      <div class="hero-links">
+        <a class="btn" href="https://github.com/suhaasr" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="timeline" id="timeline">
+    <div class="rail" aria-hidden="true"><div class="rail-progress"></div></div>
+
+    <!-- Datadog -->
+    <section class="entry" id="datadog" style="--accent: #8b5cf6">
+      <div class="marker" aria-hidden="true"></div>
+      <div class="when mono">Oct 2025 — Present</div>
+      <article class="card">
+        <header class="card-head">
+          <div>
+            <h2>Datadog</h2>
+            <p class="role">Software Engineer · Bits Investigation</p>
+          </div>
+          <span class="badge">Current</span>
+        </header>
+        <p class="summary">
+          Bits Investigation is Datadog's AI SRE: an agent that picks up a production alert,
+          digs through metrics, logs, and traces, and explains the root cause. I work on making it
+          dependable enough to run on real production incidents.
+        </p>
+
+        <div class="project">
+          <h3>Getting Scout ready for production</h3>
+          <p>
+            Datadog recently announced <strong>Scout 1.0</strong>, its first in-house model built
+            for investigating production issues. Scout was trained with reinforcement learning in
+            simulated incident environments. My role was getting the model into production:
+            wiring it into Bits Investigation so we could measure it on our <em>actual production
+            datasets</em> instead of only the training environment it learned in.
+          </p>
+          <p>
+            Closing that gap between simulation and the real world matters. A model that scores well
+            in its own training environment still has to hold up on real alerts, real telemetry, and
+            the tools Bits actually calls in production.
+          </p>
+          <ul class="links">
+            <li><a href="https://www.datadoghq.com/blog/ai/introducing-scout-sre-specialized-model-bits-ai/" target="_blank" rel="noopener">Introducing Scout 1.0 — Datadog blog</a></li>
+            <li><a href="https://web-assets.dd-static.net/42588/1792156398-datadog-scout-post_training_a_model_for_sre_investigations-v3.pdf" target="_blank" rel="noopener">Scout technical report (PDF)</a></li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <h3>Making decisions with A/B tests</h3>
+          <p>
+            I've led the push to get teams across the org using A/B testing, so that changes to
+            prompts, models, and agent behavior are judged on measured results rather than intuition
+            or a handful of hand-picked examples.
+          </p>
+        </div>
+
+        <ul class="tags">
+          <li>LLM agents</li><li>Model evaluation</li><li>A/B testing</li><li>Observability</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Capital One -->
+    <section class="entry" id="capital-one" style="--accent: #e0464b">
+      <div class="marker" aria-hidden="true"></div>
+      <div class="when mono">Oct 2024 — Oct 2025</div>
+      <article class="card">
+        <header class="card-head">
+          <div>
+            <h2>Capital One</h2>
+            <p class="role">Software Engineer · Small Business Account Opening</p>
+          </div>
+        </header>
+        <p class="summary">
+          I worked on the systems that let small businesses open accounts with Capital One. It was
+          my first job outside Google, and it broadened how I think about building software.
+        </p>
+
+        <div class="project">
+          <h3>Moving off legacy infrastructure</h3>
+          <p>
+            I helped migrate account-opening services off legacy infrastructure. That means
+            replacing old systems without disrupting a flow that customers and the business both
+            depend on.
+          </p>
+        </div>
+
+        <div class="project">
+          <h3>AWS and life outside Google</h3>
+          <p>
+            After seven years of Google's internal stack, I got hands-on with AWS and the open,
+            industry-standard tools most of the industry uses. Seeing the same problems solved
+            a different way taught me which of my habits were good engineering and which were just
+            Google conventions.
+          </p>
+        </div>
+
+        <div class="project">
+          <h3>First experiments with LLMs</h3>
+          <p>
+            This is also where I first experimented with large language models, which led directly
+            to my next role building AI agents at Datadog.
+          </p>
+        </div>
+
+        <ul class="tags">
+          <li>AWS</li><li>Infrastructure migration</li><li>Fintech</li><li>LLMs</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Google Research -->
+    <section class="entry" id="google-research" style="--accent: #10b981">
+      <div class="marker" aria-hidden="true"></div>
+      <div class="when mono">2021 — 2024</div>
+      <article class="card">
+        <header class="card-head">
+          <div>
+            <h2>Google Research</h2>
+            <p class="role">Software Engineer · Computational Photography</p>
+          </div>
+        </header>
+        <p class="summary">
+          I built computational photography technology with Google Research and shipped it into
+          partner teams' products. My work landed in three products:
+        </p>
+
+        <div class="products">
+          <div class="product">
+            <span class="product-name">Google Pixel</span>
+            <span class="product-desc">Digital zoom pipeline</span>
+          </div>
+          <div class="product">
+            <span class="product-name">Google Meet</span>
+            <span class="product-desc">Video calling</span>
+          </div>
+          <div class="product">
+            <span class="product-name">YouTube</span>
+            <span class="product-desc">Video</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Super Res Zoom on Pixel</h3>
+          <p>
+            Pixel's digital zoom doesn't just crop and upscale. <strong>Super Res Zoom</strong>
+            merges a burst of frames, using the tiny shifts from natural hand tremor to recover
+            detail that no single frame captured. My work went into this zoom pipeline. The posts
+            below explain the technique and give a sense of the kind of work I did.
+          </p>
+          <ul class="links">
+            <li><a href="https://research.google/blog/see-better-and-further-with-super-res-zoom-on-the-pixel-3/" target="_blank" rel="noopener">See Better and Further with Super Res Zoom on the Pixel 3 — Google Research blog</a></li>
+            <li><a href="https://arxiv.org/abs/1905.03277" target="_blank" rel="noopener">Handheld Multi-Frame Super-Resolution — SIGGRAPH 2019 paper</a></li>
+            <li><a href="https://research.google/blog/hdr-low-light-and-high-dynamic-range-photography-in-the-google-camera-app/" target="_blank" rel="noopener">HDR+: Low light and high dynamic range photography — Google Research blog</a></li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <h3>Working with partner teams</h3>
+          <p>
+            Research work only counts once it ships. Much of my job was turning research ideas into
+            code that met each product's constraints, such as camera latency on a phone or real-time
+            video in Meet, and then landing it in their production pipelines.
+          </p>
+        </div>
+
+        <ul class="tags">
+          <li>Computational photography</li><li>Image processing</li><li>Super-resolution</li><li>On-device</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Google Product Infrastructure -->
+    <section class="entry" id="google-infra" style="--accent: #3b82f6">
+      <div class="marker" aria-hidden="true"></div>
+      <div class="when mono">2017 — 2021</div>
+      <article class="card">
+        <header class="card-head">
+          <div>
+            <h2>Google</h2>
+            <p class="role">Software Engineer · Product Infrastructure, Logs Processing</p>
+          </div>
+        </header>
+        <p class="summary">
+          My first job out of school was on a logs processing team handling
+          <strong>petabytes of data per day</strong>. This is where I learned how to build data
+          pipelines at hyperscale.
+        </p>
+
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-num mono">~24h</span>
+            <span class="stat-label">average latency before</span>
+          </div>
+          <div class="stat-arrow" aria-hidden="true">→</div>
+          <div class="stat">
+            <span class="stat-num mono accent">6h</span>
+            <span class="stat-label">average latency after</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num mono">PB/day</span>
+            <span class="stat-label">data processed</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Pipelines that survive anything</h3>
+          <p>
+            At this scale, something is always broken somewhere. I worked on making the pipelines
+            resilient to the three ways things fail:
+          </p>
+          <ul class="bullets">
+            <li><strong>Configuration</strong>: bad pushes and misconfigurations shouldn't take processing down.</li>
+            <li><strong>Data</strong>: malformed, unexpected, or skewed input shouldn't stop the pipeline.</li>
+            <li><strong>Infrastructure</strong>: machine, network, and datacenter failures should slow processing down, not stop it.</li>
+          </ul>
+        </div>
+
+        <div class="project">
+          <h3>From a day to a few hours</h3>
+          <p>
+            My work brought average end-to-end latency down from about <strong>24 hours to
+            6 hours</strong>, so teams that depended on these logs got their data roughly four times
+            sooner.
+          </p>
+        </div>
+
+        <ul class="tags">
+          <li>Distributed systems</li><li>Data pipelines</li><li>Reliability</li><li>Hyperscale</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- CMU -->
+    <section class="entry" id="cmu" style="--accent: #c41230">
+      <div class="marker" aria-hidden="true"></div>
+      <div class="when mono">2013 — 2017</div>
+      <article class="card">
+        <header class="card-head">
+          <div>
+            <h2>Carnegie Mellon University</h2>
+            <p class="role">B.S. Computer Science · Minor in Economics</p>
+          </div>
+        </header>
+        <p class="summary">
+          I earned a bachelor's in computer science with a minor in economics. CMU is where I found
+          the interests that shaped my career.
+        </p>
+
+        <div class="project">
+          <h3>Teaching</h3>
+          <p>
+            I was a teaching assistant for several introductory computer science courses, helping
+            students through their first serious programming courses.
+          </p>
+        </div>
+
+        <div class="project">
+          <h3>Graphics and computational photography</h3>
+          <p>
+            My upper-level electives were in <strong>computational photography</strong> and
+            <strong>computer graphics</strong>. They're why I wanted to join Google's camera and
+            imaging teams, which I eventually did.
+          </p>
+          <ul class="links">
+            <li>
+              <a href="https://github.com/suhaasr/HDR_plus_pipeline" target="_blank" rel="noopener">HDR+ pipeline</a>
+              — final project for Visual Computing Systems with Tim Brooks: an implementation of
+              Google's HDR+ burst photography pipeline in Halide
+            </li>
+            <li>
+              <a href="https://github.com/suhaasr/15462_font_renderer" target="_blank" rel="noopener">DrawSVG rasterizer</a>
+              — Computer Graphics (15-462) assignment
+            </li>
+            <li>
+              <a href="https://github.com/suhaasr/build18-s17" target="_blank" rel="noopener">Temporal aliasing hardware hack</a>
+              — Build18 hackathon project
+            </li>
+          </ul>
+        </div>
+
+        <ul class="tags">
+          <li>Computer science</li><li>Economics</li><li>Graphics</li><li>Teaching</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Suhaas Reddy</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
