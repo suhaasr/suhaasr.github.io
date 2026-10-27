@@ -10,6 +10,9 @@
   --rail: #262b3a;
   --radius: 16px;
   --max: 980px;
+  --date-col: 168px;
+  --tl-gap: 48px;
+  --tl-pad: 24px;
   color-scheme: dark;
 }
 
@@ -83,10 +86,11 @@ a:hover { text-decoration: underline; }
   position: relative;
   max-width: var(--max);
   margin: 0 auto;
-  padding: 64px 24px 32px 24px;
+  padding: 64px var(--tl-pad) 32px var(--tl-pad);
 }
 .rail {
-  position: absolute; top: 64px; bottom: 32px; left: 160px;
+  position: absolute; top: 64px; bottom: 32px;
+  left: calc(var(--tl-pad) + var(--date-col) + var(--tl-gap) / 2 - 1px);
   width: 2px; background: var(--rail); border-radius: 2px;
 }
 .rail-progress {
@@ -98,14 +102,15 @@ a:hover { text-decoration: underline; }
 .entry {
   position: relative;
   display: grid;
-  grid-template-columns: 136px 1fr;
-  gap: 48px;
+  grid-template-columns: var(--date-col) 1fr;
+  gap: var(--tl-gap);
   margin-bottom: 56px;
   scroll-margin-top: 24px;
 }
 .marker {
-  position: absolute; left: 160px; top: 26px;
-  width: 16px; height: 16px; margin-left: -7px;
+  position: absolute; top: 26px;
+  left: calc(var(--date-col) + var(--tl-gap) / 2 - 8px);
+  width: 16px; height: 16px;
   border-radius: 50%;
   background: var(--bg);
   border: 3px solid var(--accent);
@@ -113,7 +118,8 @@ a:hover { text-decoration: underline; }
   z-index: 1;
 }
 .when {
-  text-align: right; padding-top: 18px;
+  text-align: right; padding-top: 18px; padding-right: 12px;
+  white-space: nowrap;
   color: var(--muted); font-size: 13px; line-height: 1.4;
 }
 
@@ -202,9 +208,9 @@ a:hover { text-decoration: underline; }
   .hero { padding: 64px 20px 40px; }
   .timeline { padding: 40px 16px 24px 40px; }
   .rail { left: 19px; top: 40px; }
-  .marker { left: -21px; top: 4px; }
+  .marker { left: -28px; top: 4px; }
   .entry { grid-template-columns: 1fr; gap: 10px; margin-bottom: 40px; }
-  .when { text-align: left; padding-top: 0; }
+  .when { text-align: left; padding-top: 0; padding-right: 0; white-space: normal; }
   .card { padding: 22px 20px; }
   .products { grid-template-columns: 1fr; }
   .stat:last-child { margin-left: 0; }
