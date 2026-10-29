@@ -34,21 +34,22 @@ function updateProgress() {
   progress.style.height = (pct * 100) + '%';
 }
 
-// Each stretch of the fill takes the accent of the node it starts at. Uses offsetTop
-// so the entries' reveal transform doesn't shift the color stops.
+// The fill is solid in each node's accent for a short band around that node and
+// blends into the next accent between nodes. Uses offsetTop so the entries' reveal
+// transform doesn't shift the color stops.
 function paintRail() {
   const railTop = rail.offsetTop;
-  const stops = [...entries].map((entry) => {
+  const ys = [...entries].map((entry) => {
     const m = entry.querySelector('.marker');
-    return {
-      color: getComputedStyle(entry).getPropertyValue('--accent').trim(),
-      y: entry.offsetTop + m.offsetTop + m.offsetHeight / 2 - railTop,
-    };
+    return entry.offsetTop + m.offsetTop + m.offsetHeight / 2 - railTop;
   });
-  const parts = stops.map((st, i) => {
-    const from = i === 0 ? '0px' : `${st.y}px`;
-    const to = i === stops.length - 1 ? '100%' : `${stops[i + 1].y}px`;
-    return `${st.color} ${from} ${to}`;
+  const parts = [...entries].map((entry, i) => {
+    const color = getComputedStyle(entry).getPropertyValue('--accent').trim();
+    const gaps = [ys[i] - ys[i - 1], ys[i + 1] - ys[i]].filter((g) => g > 0);
+    const band = Math.min(56, ...gaps.map((g) => g / 4));
+    const from = i === 0 ? '0px' : `${ys[i] - band}px`;
+    const to = i === ys.length - 1 ? '100%' : `${ys[i] + band}px`;
+    return `${color} ${from} ${to}`;
   });
   progress.style.backgroundImage = `linear-gradient(to bottom, ${parts.join(', ')})`;
   progress.style.backgroundSize = `100% ${rail.offsetHeight}px`;
