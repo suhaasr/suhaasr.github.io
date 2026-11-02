@@ -144,7 +144,7 @@ const lightQuery = matchMedia('(prefers-color-scheme: light)');
 function applyTheme(theme, animate) {
   const set = () => {
     root.dataset.theme = theme;
-    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    toggle.setAttribute('aria-checked', String(theme === 'dark'));
   };
   if (!animate || reduceMotion.matches) return set();
   if (document.startViewTransition) return document.startViewTransition(set);
