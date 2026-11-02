@@ -151,6 +151,15 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent);
   z-index: 1;
 }
+.ripple {
+  position: absolute; left: 50%; top: 50%;
+  width: 16px; height: 16px; margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  pointer-events: none;
+  opacity: 0;
+}
 .when {
   text-align: right; padding-top: 18px; padding-right: 12px;
   white-space: nowrap;

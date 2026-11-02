@@ -24,11 +24,35 @@ const maxScroll = () => Math.max(0, root.scrollHeight - window.innerHeight);
 
 const timeline = document.getElementById('timeline');
 let firstNodeY = 0;
+let nodeYs = [];
+let passed = [];
+const markers = [...entries].map((e) => e.querySelector('.marker'));
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+// A ripple spreads from a node when the fill tip crosses it going down, and
+// plays in reverse (collapsing into the node) when the tip crosses back up.
+function ripple(marker, reverse) {
+  if (reduceMotion.matches) return;
+  const dir = reverse ? 'reverse' : 'normal';
+  for (const [delay, scale] of [[0, 3.5], [90, 2.4]]) {
+    const r = document.createElement('span');
+    r.className = 'ripple';
+    marker.appendChild(r);
+    r.animate(
+      [{ transform: 'scale(1)', opacity: 0.7 }, { transform: `scale(${scale})`, opacity: 0 }],
+      { duration: 650, delay, direction: dir, easing: 'cubic-bezier(.2, .7, .3, 1)', fill: 'both' }
+    ).finished.then(() => r.remove());
+  }
+  marker.animate(
+    [{ transform: 'scale(1)' }, { transform: 'scale(1.3)' }, { transform: 'scale(1)' }],
+    { duration: 350, easing: 'ease-out' }
+  );
+}
 
 // At the top of the page the fill ends at the center of the first node; from there
 // the tip glides to wherever the rail ends on screen at the bottom of the page, so
 // the rail is exactly full at max scroll. Layout offsets ignore transforms.
-function updateProgress() {
+function updateProgress(silent) {
   const y = window.scrollY, max = maxScroll();
   const s = max > 0 && y < max - 1 ? Math.max(0, y / max) : 1;
   const top = timeline.offsetTop + rail.offsetTop, h = rail.offsetHeight;
@@ -37,6 +61,13 @@ function updateProgress() {
   const tip = y + start + s * (end - start);
   const pct = Math.min(1, Math.max(0, (tip - top) / h));
   progress.style.height = (pct * 100) + '%';
+
+  const fill = pct * h;
+  nodeYs.forEach((ny, i) => {
+    const now = fill > ny + 1;
+    if (now !== passed[i] && silent !== true) ripple(markers[i], !now);
+    passed[i] = now;
+  });
 }
 
 // The fill is solid in each node's accent for a short band around that node and
@@ -49,6 +80,7 @@ function paintRail() {
     return entry.offsetTop + m.offsetTop + m.offsetHeight / 2 - railTop;
   });
   firstNodeY = ys[0] || 0;
+  nodeYs = ys;
   const bands = ys.map((y, i) => {
     const gaps = [y - ys[i - 1], ys[i + 1] - y].filter((g) => g > 0);
     return Math.min(56, ...gaps.map((g) => g / 4));
@@ -69,7 +101,7 @@ function paintRail() {
   rail.style.maskImage = mask;
 }
 
-function layoutRail() { paintRail(); updateProgress(); }
+function layoutRail() { paintRail(); updateProgress(true); }
 window.addEventListener('scroll', updateProgress, { passive: true });
 window.addEventListener('resize', layoutRail);
 window.addEventListener('load', layoutRail);
@@ -77,7 +109,6 @@ if (document.fonts) document.fonts.ready.then(layoutRail);
 layoutRail();
 
 // Squish against the top/bottom edge on overscroll, then spring back.
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let edge = 0, pushed = 0, releaseTimer;
 
 function squish(dir, dist) {
