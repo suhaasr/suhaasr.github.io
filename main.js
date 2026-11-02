@@ -10,7 +10,7 @@ if ('IntersectionObserver' in window) {
         io.unobserve(item.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   entries.forEach((e) => io.observe(e));
 } else {
   entries.forEach((e) => e.classList.add('visible'));
@@ -22,15 +22,20 @@ const rail = document.querySelector('.rail');
 const progress = document.querySelector('.rail-progress');
 const maxScroll = () => Math.max(0, root.scrollHeight - window.innerHeight);
 
-// The fill tip starts at 60% of the viewport and glides to wherever the rail ends
-// on screen at the bottom of the page, so the rail is exactly full at max scroll.
+const timeline = document.getElementById('timeline');
+let firstNodeY = 0;
+
+// At the top of the page the fill ends at the center of the first node; from there
+// the tip glides to wherever the rail ends on screen at the bottom of the page, so
+// the rail is exactly full at max scroll. Layout offsets ignore transforms.
 function updateProgress() {
-  const y = window.scrollY, max = maxScroll(), vh = window.innerHeight;
+  const y = window.scrollY, max = maxScroll();
   const s = max > 0 && y < max - 1 ? Math.max(0, y / max) : 1;
-  const r = rail.getBoundingClientRect();
-  const top = r.top + y, bottom = r.bottom + y;
-  const tip = y + vh * 0.6 + s * (bottom - max - vh * 0.6);
-  const pct = Math.min(1, Math.max(0, (tip - top) / (bottom - top)));
+  const top = timeline.offsetTop + rail.offsetTop, h = rail.offsetHeight;
+  const start = top + firstNodeY;
+  const end = top + h - max;
+  const tip = y + start + s * (end - start);
+  const pct = Math.min(1, Math.max(0, (tip - top) / h));
   progress.style.height = (pct * 100) + '%';
 }
 
@@ -43,16 +48,25 @@ function paintRail() {
     const m = entry.querySelector('.marker');
     return entry.offsetTop + m.offsetTop + m.offsetHeight / 2 - railTop;
   });
+  firstNodeY = ys[0] || 0;
+  const bands = ys.map((y, i) => {
+    const gaps = [y - ys[i - 1], ys[i + 1] - y].filter((g) => g > 0);
+    return Math.min(56, ...gaps.map((g) => g / 4));
+  });
   const parts = [...entries].map((entry, i) => {
     const color = getComputedStyle(entry).getPropertyValue('--accent').trim();
-    const gaps = [ys[i] - ys[i - 1], ys[i + 1] - ys[i]].filter((g) => g > 0);
-    const band = Math.min(56, ...gaps.map((g) => g / 4));
+    const band = bands[i];
     const from = i === 0 ? '0px' : `${ys[i] - band}px`;
     const to = i === ys.length - 1 ? '100%' : `${ys[i] + band}px`;
     return `${color} ${from} ${to}`;
   });
   progress.style.backgroundImage = `linear-gradient(to bottom, ${parts.join(', ')})`;
   progress.style.backgroundSize = `100% ${rail.offsetHeight}px`;
+  // Below the last node's band, the whole rail fades into the page background.
+  const last = ys.length - 1;
+  const mask = `linear-gradient(to bottom, #000 ${ys[last] + bands[last]}px, transparent 100%)`;
+  rail.style.webkitMaskImage = mask;
+  rail.style.maskImage = mask;
 }
 
 function layoutRail() { paintRail(); updateProgress(); }
@@ -80,7 +94,7 @@ function squish(dir, dist) {
 function release() {
   if (!edge) return;
   edge = 0; pushed = 0;
-  body.style.transition = 'transform .6s cubic-bezier(.3, 1.8, .5, 1)';
+  body.style.transition = 'transform .45s cubic-bezier(.3, 1.8, .5, 1)';
   body.style.transform = '';
 }
 
@@ -121,3 +135,34 @@ window.addEventListener('touchmove', (e) => {
 const endTouch = () => { lastTouchY = null; touchEdge = 0; release(); };
 window.addEventListener('touchend', endTouch);
 window.addEventListener('touchcancel', endTouch);
+
+// Theme toggle: starts from the system setting (set before paint in index.html),
+// remembers an explicit choice, and cross-fades between themes.
+const toggle = document.querySelector('.theme-toggle');
+const lightQuery = matchMedia('(prefers-color-scheme: light)');
+
+function applyTheme(theme, animate) {
+  const set = () => {
+    root.dataset.theme = theme;
+    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  };
+  if (!animate || reduceMotion.matches) return set();
+  if (document.startViewTransition) return document.startViewTransition(set);
+  root.classList.add('theme-fade');
+  set();
+  setTimeout(() => root.classList.remove('theme-fade'), 450);
+}
+
+function savedTheme() {
+  try { return localStorage.getItem('theme'); } catch (e) { return null; }
+}
+
+toggle.addEventListener('click', () => {
+  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  applyTheme(next, true);
+});
+lightQuery.addEventListener('change', (e) => {
+  if (!savedTheme()) applyTheme(e.matches ? 'light' : 'dark', true);
+});
+applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark', false);
