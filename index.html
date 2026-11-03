@@ -32,8 +32,8 @@
       <p class="eyebrow mono">Software Engineer</p>
       <h1>Suhaas Reddy</h1>
       <p class="lede">
-        From computational photography in the Google Pixel camera to petabyte-scale data
-        pipelines to AI agents that investigate production incidents.
+        I've worked on digital zoom for the Pixel camera, logs pipelines that process petabytes
+        a day, and now AI agents that investigate production incidents.
       </p>
       <nav class="jump" aria-label="Jump to a period">
         <a href="#datadog"><span class="mono">2025</span> Datadog</a>
@@ -64,24 +64,24 @@
           <span class="badge">Current</span>
         </header>
         <p class="summary">
-          Bits Investigation is Datadog's AI SRE: an agent that picks up a production alert,
-          digs through metrics, logs, and traces, and explains the root cause. I work on making it
-          dependable enough to run on real production incidents.
+          Bits Investigation is Datadog's AI SRE. When an alert fires, it looks through the relevant
+          metrics, logs, and traces and tries to explain what went wrong. I work on making it
+          reliable enough for real incidents.
         </p>
 
         <div class="project">
-          <h3>Getting Scout ready for production</h3>
+          <h3>Taking Scout to production</h3>
           <p>
-            Datadog recently announced <strong>Scout 1.0</strong>, its first in-house model built
-            for investigating production issues. Scout was trained with reinforcement learning in
-            simulated incident environments. My role was getting the model into production:
-            wiring it into Bits Investigation so we could measure it on our <em>actual production
-            datasets</em> instead of only the training environment it learned in.
+            Datadog recently released <strong>Scout 1.0</strong>, its first in-house model for
+            investigating production issues. Scout was trained with reinforcement learning in
+            simulated incident environments. I worked on putting it into production, integrating
+            it with Bits Investigation so we could evaluate it on our <em>actual production
+            datasets</em> and not just the environment it was trained in.
           </p>
           <p>
-            Closing that gap between simulation and the real world matters. A model that scores well
-            in its own training environment still has to hold up on real alerts, real telemetry, and
-            the tools Bits actually calls in production.
+            A model can do well in its training environment and still struggle with real alerts, messy
+            telemetry, and the tools Bits calls in production. Testing on production data is how we
+            find out.
           </p>
           <ul class="links">
             <li><a href="https://www.datadoghq.com/blog/ai/introducing-scout-sre-specialized-model-bits-ai/" target="_blank" rel="noopener">Introducing Scout 1.0 — Datadog blog</a></li>
@@ -92,9 +92,9 @@
         <div class="project">
           <h3>Making decisions with A/B tests</h3>
           <p>
-            I've led the push to get teams across the org using A/B testing, so that changes to
-            prompts, models, and agent behavior are judged on measured results rather than intuition
-            or a handful of hand-picked examples.
+            I've been driving adoption of A/B testing across the org, so changes to prompts, models,
+            and agent behavior get decided by measured results instead of intuition or a few
+            hand-picked examples.
           </p>
         </div>
 
@@ -116,34 +116,33 @@
           </div>
         </header>
         <p class="summary">
-          I worked on the systems that let small businesses open accounts with Capital One. It was
-          my first job outside Google, and it broadened how I think about building software.
+          I worked on the systems small businesses use to open accounts with Capital One. It was my
+          first job outside Google.
         </p>
 
         <div class="project">
           <h3>Moving off legacy infrastructure</h3>
           <p>
-            I helped migrate account-opening services off legacy infrastructure. That means
-            replacing old systems without disrupting a flow that customers and the business both
-            depend on.
+            I helped migrate account-opening services off legacy infrastructure, replacing old systems
+            without breaking a flow that customers and the business rely on.
           </p>
         </div>
 
         <div class="project">
-          <h3>AWS and life outside Google</h3>
+          <h3>AWS and industry-standard tools</h3>
           <p>
-            After seven years of Google's internal stack, I got hands-on with AWS and the open,
-            industry-standard tools most of the industry uses. Seeing the same problems solved
-            a different way taught me which of my habits were good engineering and which were just
-            Google conventions.
+            After seven years on Google's internal stack, I got hands-on experience with AWS and the
+            standard tools most companies use. Solving familiar problems with different tools showed
+            me which of my habits were good practice in general and which were just how Google does
+            things.
           </p>
         </div>
 
         <div class="project">
           <h3>First experiments with LLMs</h3>
           <p>
-            This is also where I first experimented with large language models, which led directly
-            to my next role building AI agents at Datadog.
+            This is also where I first experimented with large language models, which got me
+            interested in the AI agent work I do now at Datadog.
           </p>
         </div>
 
@@ -165,8 +164,8 @@
           </div>
         </header>
         <p class="summary">
-          I built computational photography technology with Google Research and shipped it into
-          partner teams' products. My work landed in three products:
+          I built computational photography features at Google Research and worked with partner
+          teams to ship them. My work landed in three products:
         </p>
 
         <div class="products">
@@ -187,10 +186,10 @@
         <div class="project">
           <h3>Super Res Zoom on Pixel</h3>
           <p>
-            Pixel's digital zoom doesn't just crop and upscale. <strong>Super Res Zoom</strong>
-            merges a burst of frames, using the tiny shifts from natural hand tremor to recover
-            detail that no single frame captured. My work went into this zoom pipeline. These posts
-            are from my time on the team, covering the Pixel 6 Pro through the Pixel 7 Pro.
+            Pixel's digital zoom does more than crop and upscale. <strong>Super Res Zoom</strong>
+            merges a burst of frames and uses the small shifts from natural hand shake to recover
+            detail that no single frame has. I worked on this zoom pipeline. The posts below are
+            from my time on the team, from the Pixel 6 Pro to the Pixel 7 Pro.
           </p>
           <ul class="links">
             <li><a href="https://blog.google/products-and-platforms/devices/pixel/super-res-zoom-google-pixel/" target="_blank" rel="noopener">How Pixel’s Super Res Zoom works</a> — Google Keyword blog, Apr 2023</li>
@@ -203,9 +202,9 @@
         <div class="project">
           <h3>Working with partner teams</h3>
           <p>
-            Research work only counts once it ships. Much of my job was turning research ideas into
-            code that met each product's constraints, such as camera latency on a phone or real-time
-            video in Meet, and then landing it in their production pipelines.
+            A lot of my job was taking research ideas and making them work within each product's
+            constraints, like camera latency on a phone or real-time video in Meet, then landing the
+            code in their production pipelines.
           </p>
         </div>
 
@@ -227,9 +226,9 @@
           </div>
         </header>
         <p class="summary">
-          My first job out of school was on a logs processing team handling
-          <strong>petabytes of data per day</strong>. This is where I learned how to build data
-          pipelines at hyperscale.
+          My first job out of school was on a logs processing team that handled
+          <strong>petabytes of data per day</strong>. It's where I learned how to run data pipelines
+          at very large scale.
         </p>
 
         <div class="stat-row">
@@ -249,28 +248,27 @@
         </div>
 
         <div class="project">
-          <h3>Pipelines that survive anything</h3>
+          <h3>Keeping the pipelines running</h3>
           <p>
-            At this scale, something is always broken somewhere. I worked on making the pipelines
-            resilient to the three ways things fail:
+            At this scale, some part of the system is usually failing. I worked on making the
+            pipelines resilient to three kinds of problems:
           </p>
           <ul class="bullets">
-            <li><strong>Configuration</strong>: bad pushes and misconfigurations shouldn't take processing down.</li>
+            <li><strong>Configuration</strong>: a bad push or misconfiguration shouldn't take processing down.</li>
             <li><strong>Data</strong>: malformed, unexpected, or skewed input shouldn't stop the pipeline.</li>
-            <li><strong>Infrastructure</strong>: machine, network, and datacenter failures should slow processing down, not stop it.</li>
+            <li><strong>Infrastructure</strong>: machine, network, and datacenter failures should slow processing, not stop it.</li>
           </ul>
           <p>
-            Not every failure came from outside. Some of the hardest bugs were race conditions
-            inside the production systems themselves, and I identified and mitigated them in
-            live systems.
+            I also identified and mitigated race conditions in the live production systems
+            themselves.
           </p>
         </div>
 
         <div class="project">
-          <h3>From a day to a few hours</h3>
+          <h3>Cutting latency</h3>
           <p>
             My work brought average end-to-end latency down from about <strong>24 hours to
-            6 hours</strong>, so teams that depended on these logs got their data roughly four times
+            6 hours</strong>, so teams that relied on these logs got their data about four times
             sooner.
           </p>
         </div>
@@ -293,15 +291,13 @@
           </div>
         </header>
         <p class="summary">
-          I earned a bachelor's in computer science with a minor in economics. CMU is where I found
-          the interests that shaped my career.
+          I earned a bachelor's in computer science with a minor in economics.
         </p>
 
         <div class="project">
           <h3>Teaching</h3>
           <p>
-            I was a teaching assistant for several introductory computer science courses, helping
-            students through their first serious programming courses.
+            I was a teaching assistant for several introductory computer science courses.
           </p>
         </div>
 
@@ -309,13 +305,13 @@
           <h3>Graphics and computational photography</h3>
           <p>
             My upper-level electives were in <strong>computational photography</strong> and
-            <strong>computer graphics</strong>. They're why I wanted to join Google's camera and
-            imaging teams, which I eventually did.
+            <strong>computer graphics</strong>. Those classes are why I wanted to work on Google's
+            camera and imaging teams, which I eventually did.
           </p>
           <ul class="links">
             <li>
               <a href="https://github.com/suhaasr/HDR_plus_pipeline" target="_blank" rel="noopener">HDR+ pipeline</a>
-              — final project for Visual Computing Systems with Tim Brooks: an implementation of
+              — my final project with Tim Brooks for Visual Computing Systems, implementing
               Google's HDR+ burst photography pipeline in Halide
             </li>
           </ul>
